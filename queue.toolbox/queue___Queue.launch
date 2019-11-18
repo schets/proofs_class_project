@@ -5,18 +5,19 @@
     <stringAttribute key="distributedNetworkInterface" value="192.168.0.6"/>
     <intAttribute key="distributedNodesCount" value="1"/>
     <stringAttribute key="distributedTLC" value="off"/>
-    <intAttribute key="fpIndex" value="84"/>
+    <intAttribute key="fpIndex" value="118"/>
     <intAttribute key="maxHeapSize" value="25"/>
     <stringAttribute key="modelBehaviorInit" value=""/>
     <stringAttribute key="modelBehaviorNext" value=""/>
     <stringAttribute key="modelBehaviorSpec" value="Spec"/>
     <intAttribute key="modelBehaviorSpecType" value="1"/>
-    <stringAttribute key="modelBehaviorVars" value="buffer, pc, read_ind, last_read, write_ind"/>
+    <stringAttribute key="modelBehaviorVars" value="did_proper_read, buffer, pc, read_ind, last_read, write_ind"/>
     <stringAttribute key="modelComments" value=""/>
     <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
     <listAttribute key="modelCorrectnessInvariants">
         <listEntry value="1read_ind &lt;= write_ind"/>
         <listEntry value="1last_read /= -1"/>
+        <listEntry value="1did_proper_read = 1"/>
     </listAttribute>
     <listAttribute key="modelCorrectnessProperties">
         <listEntry value="0Termination"/>

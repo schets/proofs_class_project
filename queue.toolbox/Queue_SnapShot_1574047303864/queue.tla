@@ -11,11 +11,9 @@ fair process writer = 0
 begin
  Write:
   while write_ind <= Writes do
-    if read_ind + BufSize > write_ind then
-        \* this must come first, write before updating index
-        buffer[1 + (write_ind % BufSize)] := write_ind;
-        write_ind := write_ind + 1;
-    end if;
+    \* this must come first, write before updating index
+    buffer[1 + (write_ind % BufSize)] := write_ind;
+    write_ind := write_ind + 1;
   end while;
   
 end process;
@@ -55,11 +53,8 @@ Init == (* Global variables *)
 
 Write == /\ pc[0] = "Write"
          /\ IF write_ind <= Writes
-               THEN /\ IF read_ind + BufSize > write_ind
-                          THEN /\ buffer' = [buffer EXCEPT ![1 + (write_ind % BufSize)] = write_ind]
-                               /\ write_ind' = write_ind + 1
-                          ELSE /\ TRUE
-                               /\ UNCHANGED << buffer, write_ind >>
+               THEN /\ buffer' = [buffer EXCEPT ![1 + (write_ind % BufSize)] = write_ind]
+                    /\ write_ind' = write_ind + 1
                     /\ pc' = [pc EXCEPT ![0] = "Write"]
                ELSE /\ pc' = [pc EXCEPT ![0] = "Done"]
                     /\ UNCHANGED << buffer, write_ind >>
@@ -105,5 +100,5 @@ Termination == <>(\A self \in ProcSet: pc[self] = "Done")
 
 =============================================================================
 \* Modification History
-\* Last modified Sun Nov 17 22:23:47 EST 2019 by samuelschetterer
+\* Last modified Sun Nov 17 22:21:37 EST 2019 by samuelschetterer
 \* Created Sun Nov 17 20:26:38 EST 2019 by samuelschetterer
